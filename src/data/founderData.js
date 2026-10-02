@@ -6,8 +6,8 @@ export const founderData = {
   tagline: "Custom SaaS Engineering & Software Development Agency",
   email: "support@infratechs.online",
   inquiryEmail: "support@infratechs.online",
-  phone: "+1 (512) 843-9210",
-  address: "InfraTechs HQ, Silicon Boulevard, Austin, TX 78701",
+  phone: "+91 9649848046",
+  address: "Gulab Bari, Near Railway Crossing, Ajmer, Rajasthan, India - 305001",
   avatarUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600",
   bio: "Isha Patharia is the founder and principal software architect at InfraTechs (infratechs.online). With extensive experience in full-stack web engineering, cloud-native architectures, and modern SaaS development, she leads our team in engineering scalable platforms while providing transparent technical insights and workstation maintenance benchmarks.",
   founderStory: `I founded InfraTechs (infratechs.online) with a singular mission: to deliver uncompromising, high-performance custom SaaS development and software solutions. Over years of building production applications, our engineers frequently test, benchmark, and deploy various developer tools, PC utilities, and cloud infrastructure.

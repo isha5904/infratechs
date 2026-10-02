@@ -70,7 +70,9 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-3.5 h-3.5 text-sky-400" />
-                <span>{founderData.phone}</span>
+                <a href={`tel:${founderData.phone.replace(/\s+/g, '')}`} className="hover:text-white transition-colors">
+                  {founderData.phone}
+                </a>
               </div>
             </div>
           </div>

@@ -203,8 +203,10 @@ export default function ContactPage() {
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <strong className="block text-slate-900 dark:text-white font-semibold">Direct Phone:</strong>
-                    <span className="text-slate-600 dark:text-slate-300">{founderData.phone}</span>
+                    <strong className="block text-slate-900 dark:text-white font-semibold">Direct Phone / WhatsApp:</strong>
+                    <a href={`tel:${founderData.phone.replace(/\s+/g, '')}`} className="text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium">
+                      {founderData.phone}
+                    </a>
                   </div>
                 </div>
 
@@ -214,7 +216,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <strong className="block text-slate-900 dark:text-white font-semibold">Engineering & Lab Hours:</strong>
-                    <span className="text-slate-600 dark:text-slate-300">Monday &ndash; Friday: 9:00 AM &ndash; 6:00 PM CST</span>
+                    <span className="text-slate-600 dark:text-slate-300">Monday &ndash; Saturday: 9:30 AM &ndash; 6:30 PM IST</span>
                   </div>
                 </div>
               </div>

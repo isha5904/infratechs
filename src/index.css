@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans text-slate-800 dark:text-slate-200 bg-slate-50 dark:bg-slate-950;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-700 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400 dark:bg-slate-600;
+}
+
+/* Tooltip arrow helper */
+.popover-arrow-up::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 28px;
+  border-width: 0 8px 8px 8px;
+  border-style: solid;
+  border-color: transparent transparent #ffffff transparent;
+}
+
+.dark .popover-arrow-up::before {
+  border-color: transparent transparent #1e293b transparent;
+}

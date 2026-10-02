@@ -58,7 +58,7 @@ export default function Header() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2 overflow-hidden text-ellipsis whitespace-nowrap">
             <span className="bg-white/20 text-white px-2 py-0.5 rounded-full text-[11px] font-bold tracking-wide">
-              INFRATECHS.ONLINE
+              SOFTWARE DEVELOPMENT
             </span>
             <span>
               Custom SaaS Engineering, Full-Stack Solutions & Technical Tool Benchmarks
@@ -82,16 +82,11 @@ export default function Header() {
               <Code2 className="w-5 h-5" />
             </div>
             <div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-                  InfraTechs
-                </span>
-                <span className="text-[10px] font-bold px-1.5 py-0.5 bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300 rounded border border-sky-300 dark:border-sky-800 uppercase tracking-wider">
-                  .online
-                </span>
-              </div>
+              <span className="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                InfraTechs
+              </span>
               <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium tracking-tight">
-                Software & SaaS Engineering Agency &bull; infratechs.online
+                Software & SaaS Engineering Agency
               </p>
             </div>
           </Link>

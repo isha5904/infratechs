@@ -53,24 +53,6 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-white/95 dark:bg-slate-950/95 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
-      {/* Top Banner */}
-      <div className="bg-gradient-to-r from-sky-600 via-sky-500 to-indigo-600 text-white text-xs py-1.5 px-4 font-medium">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2 overflow-hidden text-ellipsis whitespace-nowrap">
-            <span className="bg-white/20 text-white px-2 py-0.5 rounded-full text-[11px] font-bold tracking-wide">
-              SOFTWARE DEVELOPMENT
-            </span>
-            <span>
-              Custom SaaS Engineering, Full-Stack Solutions & Technical Tool Benchmarks
-            </span>
-          </div>
-          <div className="hidden sm:flex items-center gap-4 text-sky-100 text-xs">
-            <Link to="/contact" className="hover:text-white transition-colors flex items-center gap-1">
-              <Code2 className="w-3.5 h-3.5" /> Request Project Quote
-            </Link>
-          </div>
-        </div>
-      </div>
 
       {/* Main Navigation Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

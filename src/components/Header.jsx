@@ -85,12 +85,12 @@ export default function Header() {
                 <span className="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
                   InfraTechs
                 </span>
-                <span className="text-[10px] font-bold px-1.5 py-0.5 bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300 rounded border border-sky-300 dark:border-sky-800">
-                  ONLINE
+                <span className="text-[10px] font-bold px-1.5 py-0.5 bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300 rounded border border-sky-300 dark:border-sky-800 uppercase tracking-wider">
+                  .online
                 </span>
               </div>
               <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium tracking-tight">
-                infratechs.online &bull; SaaS Engineering
+                Software & SaaS Engineering Agency &bull; infratechs.online
               </p>
             </div>
           </Link>

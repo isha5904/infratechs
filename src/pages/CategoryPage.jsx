@@ -29,14 +29,10 @@ export default function CategoryPage() {
     switch (categoryId) {
       case 'cleaner':
         return <HardDrive className="w-8 h-8 text-amber-500" />;
-      case 'vpn':
-        return <Lock className="w-8 h-8 text-sky-500" />;
-      case 'antivirus':
-        return <Shield className="w-8 h-8 text-emerald-500" />;
-      case 'passwords':
-        return <Key className="w-8 h-8 text-purple-500" />;
-      default:
+      case 'dev-cloud':
         return <Cpu className="w-8 h-8 text-indigo-500" />;
+      default:
+        return <Sparkles className="w-8 h-8 text-sky-500" />;
     }
   };
 

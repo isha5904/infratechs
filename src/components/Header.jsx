@@ -8,14 +8,15 @@ import {
   X, 
   ChevronDown, 
   Code2, 
-  HelpCircle,
   ExternalLink,
   Laptop,
-  Lock,
-  Key,
-  Flame,
   Sparkles,
-  Search
+  Search,
+  Layers,
+  Database,
+  Cloud,
+  CreditCard,
+  HardDrive
 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import SearchModal from './SearchModal';
@@ -25,12 +26,19 @@ export default function Header() {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [categoriesOpen, setCategoriesOpen] = useState(false);
+  const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [disclosurePopoverOpen, setDisclosurePopoverOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const popoverRef = useRef(null);
 
-  // Close popover on outside click
+  // Close menus on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setSolutionsOpen(false);
+    setDisclosurePopoverOpen(false);
+  }, [location.pathname]);
+
+  // Click outside to close popover
   useEffect(() => {
     function handleClickOutside(event) {
       if (popoverRef.current && !popoverRef.current.contains(event.target)) {
@@ -40,13 +48,6 @@ export default function Header() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileMenuOpen(false);
-    setCategoriesOpen(false);
-    setDisclosurePopoverOpen(false);
-  }, [location.pathname]);
 
   const isAffiliateActive = location.pathname === '/affiliate-disclosure';
 
@@ -95,7 +96,7 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Desktop Nav Items matching screenshot 1 */}
+          {/* Desktop Nav Items focused strictly on Software Development */}
           <nav className="hidden lg:flex items-center gap-6 xl:gap-7 text-sm font-semibold text-slate-700 dark:text-slate-200">
             <Link
               to="/services"
@@ -107,85 +108,78 @@ export default function Header() {
             </Link>
 
             <Link
-              to="/category/vpn"
+              to="/services"
               className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors py-1"
             >
-              VPNs
+              Web Engineering
             </Link>
 
             <Link
-              to="/category/antivirus"
+              to="/services"
               className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors py-1"
             >
-              Antivirus
+              Cloud & DevOps
             </Link>
 
-            <Link
-              to="/category/passwords"
-              className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors py-1"
-            >
-              Password Managers
-            </Link>
-
-            {/* Categories dropdown */}
+            {/* Development Solutions Dropdown */}
             <div className="relative group">
               <button
-                onClick={() => setCategoriesOpen(!categoriesOpen)}
+                onClick={() => setSolutionsOpen(!solutionsOpen)}
                 className="flex items-center gap-1 hover:text-sky-600 dark:hover:text-sky-400 transition-colors py-1"
               >
-                Categories
+                Solutions
                 <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-sky-600 transition-colors" />
               </button>
 
-              <div className="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl p-2.5 hidden group-hover:block transition-all z-30">
+              <div className="absolute top-full left-0 mt-2 w-72 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl p-2.5 hidden group-hover:block transition-all z-30">
                 <Link
-                  to="/category/cleaner"
+                  to="/services"
                   className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200"
                 >
-                  <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
+                  <Layers className="w-4 h-4 text-sky-500 shrink-0" />
                   <div>
-                    <div className="font-semibold">Wise Cleaner & PC Utilities</div>
-                    <div className="text-[10px] text-slate-400">Windows disk & startup tests</div>
-                  </div>
-                </Link>
-                <Link
-                  to="/category/vpn"
-                  className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200"
-                >
-                  <Lock className="w-4 h-4 text-sky-500 shrink-0" />
-                  <div>
-                    <div className="font-semibold">VPNs & Privacy Tunnels</div>
-                    <div className="text-[10px] text-slate-400">WireGuard & dedicated IPs</div>
-                  </div>
-                </Link>
-                <Link
-                  to="/category/antivirus"
-                  className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200"
-                >
-                  <Shield className="w-4 h-4 text-emerald-500 shrink-0" />
-                  <div>
-                    <div className="font-semibold">Antivirus & Endpoint Security</div>
-                    <div className="text-[10px] text-slate-400">Zero-day malware benchmarks</div>
-                  </div>
-                </Link>
-                <Link
-                  to="/category/passwords"
-                  className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200"
-                >
-                  <Key className="w-4 h-4 text-purple-500 shrink-0" />
-                  <div>
-                    <div className="font-semibold">Password & Secret Vaults</div>
-                    <div className="text-[10px] text-slate-400">Developer CLI & passkeys</div>
+                    <div className="font-semibold">Full-Stack SaaS MVPs</div>
+                    <div className="text-[10px] text-slate-400">React 19, Next.js & Node.js</div>
                   </div>
                 </Link>
                 <Link
                   to="/services"
                   className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200"
                 >
-                  <Code2 className="w-4 h-4 text-indigo-500 shrink-0" />
+                  <Database className="w-4 h-4 text-emerald-500 shrink-0" />
                   <div>
-                    <div className="font-semibold">SaaS MVP Engineering</div>
-                    <div className="text-[10px] text-slate-400">Custom web dev services</div>
+                    <div className="font-semibold">Multi-Tenant Databases</div>
+                    <div className="text-[10px] text-slate-400">PostgreSQL RLS, Prisma & Redis</div>
+                  </div>
+                </Link>
+                <Link
+                  to="/services"
+                  className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200"
+                >
+                  <CreditCard className="w-4 h-4 text-indigo-500 shrink-0" />
+                  <div>
+                    <div className="font-semibold">Stripe Monetization Systems</div>
+                    <div className="text-[10px] text-slate-400">Recurring subscriptions & webhooks</div>
+                  </div>
+                </Link>
+                <Link
+                  to="/services"
+                  className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200"
+                >
+                  <Cloud className="w-4 h-4 text-purple-500 shrink-0" />
+                  <div>
+                    <div className="font-semibold">Cloud Scale & DevOps</div>
+                    <div className="text-[10px] text-slate-400">Docker, AWS & CI/CD automation</div>
+                  </div>
+                </Link>
+                <Link
+                  to="/blog/wise-cleaner-review-2026"
+                  className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 border-t border-slate-100 dark:border-slate-800 mt-1 pt-2"
+                >
+                  <HardDrive className="w-4 h-4 text-amber-500 shrink-0" />
+                  <div>
+                    <div className="font-semibold">Wise Cleaner Workstation Lab</div>
+                    <div className="text-[10px] text-slate-400">Windows disk & startup tests</div>
                   </div>
                 </Link>
               </div>
@@ -200,7 +194,7 @@ export default function Header() {
               Blog
             </Link>
 
-            {/* Affiliate Disclosure Item with EXACT POPOVER from Screenshot 1 */}
+            {/* Affiliate Disclosure Item with Popover */}
             <div 
               ref={popoverRef}
               className="relative"
@@ -216,7 +210,6 @@ export default function Header() {
                 }`}
               >
                 Affiliate Disclosure
-                {/* Active blue indicator line matching screenshot 1 */}
                 <span
                   className={`absolute bottom-0 left-0 right-0 h-0.5 bg-sky-500 transition-all duration-200 ${
                     isAffiliateActive || disclosurePopoverOpen ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
@@ -224,7 +217,7 @@ export default function Header() {
                 />
               </Link>
 
-              {/* Tooltip / Popover Bubble matching Screenshot 1 */}
+              {/* Tooltip / Popover Bubble */}
               {disclosurePopoverOpen && (
                 <div 
                   className="absolute top-full right-0 mt-3 w-80 sm:w-96 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl p-4 z-50 animate-fade-in popover-arrow-up"
@@ -261,7 +254,7 @@ export default function Header() {
               </kbd>
             </button>
 
-            {/* Theme Toggle Button matching Screenshot 1 Moon Icon */}
+            {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
               aria-label="Toggle dark mode"
@@ -306,19 +299,19 @@ export default function Header() {
             to="/services"
             className="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800"
           >
-            SaaS Development & Architecture
+            SaaS MVP Engineering & Services
           </Link>
           <Link
             to="/blog/wise-cleaner-review-2026"
             className="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800"
           >
-            ⭐ Wise Cleaner In-Depth Review (2026)
+            ⭐ Wise Cleaner Workstation Benchmark (2026)
           </Link>
           <Link
             to="/blog"
             className="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800"
           >
-            Blog & Comparisons
+            Technical Blog & Guides
           </Link>
           <Link
             to="/affiliate-disclosure"
@@ -330,7 +323,7 @@ export default function Header() {
             to="/contact"
             className="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800"
           >
-            Contact & Founder Details
+            Contact Isha Patharia (Founder)
           </Link>
           <div className="pt-2">
             <Link

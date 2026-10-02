@@ -48,7 +48,7 @@ export default function PrivacyPolicyPage() {
                 <strong>Anonymous Usage Data:</strong> We collect aggregate, anonymized technical telemetry (browser type, operating system, page response time, referrer URL) to optimize reading speed and ensure our responsive design renders cleanly.
               </li>
               <li>
-                <strong>Cookies & Referral Tracking:</strong> As outlined in our cookie banner and affiliate disclosure, third-party vendor networks may drop a conversion tag when you navigate to a partner site (such as Wise Cleaner, NordVPN, or Bitdefender).
+                <strong>Cookies & Referral Tracking:</strong> As outlined in our cookie banner and affiliate disclosure, third-party vendor platforms may drop standard web cookies when navigating to their respective services (such as Wise Cleaner or cloud hosting providers).
               </li>
             </ul>
           </section>

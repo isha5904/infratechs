@@ -117,37 +117,37 @@ export default function Footer() {
           {/* Software Reviews & Benchmarks */}
           <div>
             <h4 className="text-sm font-bold uppercase tracking-wider text-white mb-4">
-              Reviews & Benchmarks
+              Workstation & Dev Lab
             </h4>
             <ul className="space-y-2.5 text-sm text-slate-400">
               <li>
                 <Link to="/blog/wise-cleaner-review-2026" className="text-sky-400 font-medium hover:underline flex items-center gap-1">
-                  ⭐ Wise Cleaner 2026 Review
-                </Link>
-              </li>
-              <li>
-                <Link to="/blog/best-vpns-developers-remote-work-2026" className="hover:text-sky-400 transition-colors">
-                  Best VPNs for Developers
-                </Link>
-              </li>
-              <li>
-                <Link to="/blog/antivirus-endpoint-protection-lab-test-2026" className="hover:text-sky-400 transition-colors">
-                  Antivirus Lab Benchmark
+                  ⭐ Wise Cleaner 2026 Lab Review
                 </Link>
               </li>
               <li>
                 <Link to="/blog" className="hover:text-sky-400 transition-colors">
-                  Password Manager Shootout
+                  Multi-Tenant SaaS Architecture
                 </Link>
               </li>
               <li>
                 <Link to="/blog" className="hover:text-sky-400 transition-colors">
-                  Cloud Hosting Comparison
+                  Stripe Billing & Webhook Reliability
                 </Link>
               </li>
               <li>
                 <Link to="/blog" className="hover:text-sky-400 transition-colors">
-                  All Tech Blog Guides
+                  Cloud Compute & Docker Deployments
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog" className="hover:text-sky-400 transition-colors">
+                  Developer Workstation Optimization
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog" className="hover:text-sky-400 transition-colors">
+                  All Engineering Guides & Articles
                 </Link>
               </li>
             </ul>

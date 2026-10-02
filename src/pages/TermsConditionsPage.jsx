@@ -48,7 +48,7 @@ export default function TermsConditionsPage() {
           <section className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white">3. Third-Party Products & Software Vendors</h2>
             <p>
-              Any software purchased through external or vendor links (including but not limited to Wise Cleaner, Wise Care 365, NordVPN, Bitdefender, or cloud server compute) is supplied and licensed directly by those third-party vendors. InfraTechs does not host, distribute, or license these external applications. Your software license agreement, uptime guarantees, technical support, and renewal billing reside strictly between you and the software vendor.
+              Any software purchased through external or vendor links (including but not limited to Wise Cleaner, Wise Care 365, or cloud compute services) is supplied and licensed directly by those third-party vendors. InfraTechs does not host, distribute, or license these external applications. Your software license agreement, uptime guarantees, technical support, and renewal billing reside strictly between you and the software vendor.
             </p>
           </section>
 

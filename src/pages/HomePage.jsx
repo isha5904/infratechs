@@ -277,13 +277,13 @@ export default function HomePage() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400 mb-1">
-              <ShieldCheck className="w-4 h-4" /> Recommended Tools & Workstation Utilities
+              <ShieldCheck className="w-4 h-4" /> Workstation & Cloud Infrastructure Lab
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Tested Utilities & Developer Software
+              Tested Developer Utilities & Cloud Systems
             </h2>
             <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-              Evaluated by our engineering team for speed, security, and real-world stability.
+              Evaluated by founder {founderData.name} and our engineering team for speed, security, and zero background telemetry bloat.
             </p>
           </div>
 
@@ -306,7 +306,7 @@ export default function HomePage() {
         </div>
 
         {/* Software Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto gap-8">
           {filteredSoftware.map((tool) => (
             <div
               key={tool.id}

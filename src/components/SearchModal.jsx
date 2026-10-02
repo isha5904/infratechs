@@ -69,7 +69,7 @@ export default function SearchModal({ isOpen, onClose }) {
             autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search software reviews, Wise Cleaner, SaaS dev, VPNs..."
+            placeholder="Search SaaS development, Wise Cleaner, cloud architecture..."
             className="w-full bg-transparent text-slate-900 dark:text-white placeholder-slate-400 text-base sm:text-lg focus:outline-none"
           />
           {query ? (
@@ -94,7 +94,7 @@ export default function SearchModal({ isOpen, onClose }) {
                 Popular Searches
               </div>
               <div className="flex flex-wrap gap-2">
-                {['Wise Cleaner 2026', 'Best VPNs', 'Custom SaaS MVP', 'Antivirus Benchmark', 'Affiliate Disclosure', 'Founder Bio'].map((tag) => (
+                {['Wise Cleaner 2026', 'SaaS MVP Engineering', 'Full-Stack React', 'PostgreSQL Database', 'Stripe Billing', 'Founder Isha Patharia'].map((tag) => (
                   <button
                     key={tag}
                     onClick={() => setQuery(tag)}
@@ -109,7 +109,7 @@ export default function SearchModal({ isOpen, onClose }) {
             <>
               {matchedPosts.length === 0 && matchedSoftware.length === 0 ? (
                 <div className="text-center py-8 text-slate-400 text-sm">
-                  No direct matches for "<span className="text-slate-900 dark:text-white font-medium">{query}</span>". Try another term like "Wise Cleaner" or "VPN".
+                  No direct matches for "<span className="text-slate-900 dark:text-white font-medium">{query}</span>". Try another term like "Wise Cleaner" or "SaaS Development".
                 </div>
               ) : (
                 <>

@@ -47,28 +47,26 @@ export default function RefundPolicyPage() {
             </div>
             <div>
               <h2 className="text-xl font-bold text-slate-900 dark:text-white">
-                Third-Party Affiliate Software Purchases
+                Third-Party Software & Workstation Utilities
               </h2>
               <p className="text-xs text-slate-500 dark:text-slate-400">
-                (e.g., Wise Cleaner, Wise Care 365, NordVPN, Bitdefender, 1Password)
+                (e.g., Wise Cleaner, Wise Care 365, or cloud compute services)
               </p>
             </div>
           </div>
 
           <div className="space-y-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed pt-2">
             <p>
-              When you click a buy or discounted link on our site and purchase third-party desktop utilities, cybersecurity software, or cloud hosting, your financial transaction is processed directly by that vendor or their payment merchant (e.g. 2Checkout, Stripe, Paddle, or cleverbridge).
+              When you click a buy or discounted link on our site and purchase third-party desktop utilities, developer tools, or cloud hosting, your financial transaction is processed directly by that vendor or their payment merchant (e.g. 2Checkout, Stripe, Paddle, or cleverbridge).
             </p>
             <p className="font-semibold text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-800 p-4 rounded-xl border-l-4 border-amber-500">
               InfraTechs does not process, hold, or bill credit cards for third-party software products. Consequently, refund requests must be directed to the respective vendor's official customer support department.
             </p>
             <p>
-              Most reputable vendors we recommend offer unconditional money-back guarantees:
+              Reputable vendors we review offer transparent money-back guarantees:
             </p>
             <ul className="list-disc pl-5 space-y-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
               <li><strong>WiseCleaner (Wise Care 365):</strong> Offers an official 60-day money-back guarantee. Contact support@wisecleaner.com.</li>
-              <li><strong>NordVPN:</strong> Features an unconditional 30-day money-back guarantee via 24/7 live chat.</li>
-              <li><strong>Bitdefender Total Security:</strong> Provides a 30-day refund window from purchase date.</li>
             </ul>
           </div>
         </section>

@@ -4,15 +4,20 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CookiePopup from './components/CookiePopup';
 import HomePage from './pages/HomePage';
-import DevelopmentServicesPage from './pages/DevelopmentServicesPage';
+import SoftwareDirectoryPage from './pages/SoftwareDirectoryPage';
+import ReviewsPage from './pages/ReviewsPage';
+import ComparisonsPage from './pages/ComparisonsPage';
+import GuidesPage from './pages/GuidesPage';
+import CategoryPage from './pages/CategoryPage';
+import BlogPostPage from './pages/BlogPostPage';
+import AboutPage from './pages/AboutPage';
+import EditorialPolicyPage from './pages/EditorialPolicyPage';
 import AffiliateDisclosurePage from './pages/AffiliateDisclosurePage';
 import ContactPage from './pages/ContactPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsConditionsPage from './pages/TermsConditionsPage';
 import RefundPolicyPage from './pages/RefundPolicyPage';
-import BlogListPage from './pages/BlogListPage';
-import BlogPostPage from './pages/BlogPostPage';
-import CategoryPage from './pages/CategoryPage';
+import DevelopmentServicesPage from './pages/DevelopmentServicesPage';
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -40,15 +45,24 @@ export default function App() {
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/services" element={<DevelopmentServicesPage />} />
+          <Route path="/software" element={<SoftwareDirectoryPage />} />
+          <Route path="/reviews" element={<ReviewsPage />} />
+          <Route path="/comparisons" element={<ComparisonsPage />} />
+          <Route path="/guides" element={<GuidesPage />} />
+          <Route path="/blog" element={<GuidesPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route path="/category/:categoryId" element={<CategoryPage />} />
+          
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/editorial-policy" element={<EditorialPolicyPage />} />
           <Route path="/affiliate-disclosure" element={<AffiliateDisclosurePage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/terms-conditions" element={<TermsConditionsPage />} />
           <Route path="/refund-policy" element={<RefundPolicyPage />} />
-          <Route path="/blog" element={<BlogListPage />} />
-          <Route path="/blog/:slug" element={<BlogPostPage />} />
+
+          {/* Preserved legacy developer services route */}
+          <Route path="/services" element={<DevelopmentServicesPage />} />
         </Routes>
       </main>
 

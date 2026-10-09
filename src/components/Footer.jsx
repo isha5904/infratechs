@@ -1,7 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Mail, MapPin, Phone, Code, Lock, Heart, ExternalLink, Cookie } from 'lucide-react';
-import { founderData } from '../data/founderData';
+import { 
+  Shield, 
+  Mail, 
+  MapPin, 
+  Phone, 
+  Laptop, 
+  FileText, 
+  Scale, 
+  BookOpen, 
+  CheckCircle2, 
+  ExternalLink,
+  Cookie
+} from 'lucide-react';
+import { siteConfig, founderData } from '../data/founderData';
+import { publishedCategories } from '../data/categoriesData';
 import { useCookies } from '../context/CookieContext';
 
 export default function Footer() {
@@ -10,13 +23,13 @@ export default function Footer() {
   return (
     <footer className="bg-slate-900 text-slate-300 border-t border-slate-800 transition-colors">
       
-      {/* Mandatory Affiliate Disclosure Bar in Footer */}
-      <div className="bg-slate-950/80 border-b border-slate-800/80 py-4 px-4 sm:px-6 lg:px-8 text-xs text-slate-400">
+      {/* Mandatory Affiliate & Editorial Transparency Bar */}
+      <div className="bg-slate-950/90 border-b border-slate-800/80 py-4 px-4 sm:px-6 lg:px-8 text-xs text-slate-400">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
           <div className="flex items-start gap-2.5 max-w-4xl">
             <Shield className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
             <p className="leading-relaxed">
-              <strong className="text-slate-200">Affiliate & Transparency Disclosure:</strong> InfraTechs (infratechs.online) delivers bespoke SaaS engineering and client applications. We also test, benchmark, and recommend developer tools and PC optimization utilities (such as Wise Cleaner). Currently, no active affiliate tracking links are used on this site (all vendor links are direct). In the future, should we participate in affiliate programs to support research, we may receive a referral commission at zero extra cost to you.
+              <strong className="text-slate-200">Affiliate & Editorial Transparency Disclosure:</strong> Infratechs (infratechs.online) is an independent technology publication. We may earn an affiliate commission when you purchase products or services through certain links on this website. This does not increase the price you pay. Our recommendations are based on research, feature evaluations, and hands-on utility benchmarks.
             </p>
           </div>
           <Link
@@ -28,141 +41,121 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Main Footer Content */}
+      {/* Main Footer Body */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           
-          {/* Brand & Founder Summary */}
+          {/* Brand & Editorial Mission */}
           <div className="lg:col-span-2 space-y-4">
             <Link to="/" className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-sky-600 flex items-center justify-center text-white">
-                <Code className="w-5 h-5" />
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-sky-600 to-indigo-600 flex items-center justify-center text-white">
+                <Laptop className="w-5 h-5" />
               </div>
               <span className="text-xl font-bold tracking-tight text-white">
-                InfraTechs <span className="text-sky-400 text-sm font-semibold">IT Solutions</span>
+                Infratechs
               </span>
             </Link>
+            
+            <p className="text-xs text-sky-400 font-medium">
+              {siteConfig.tagline}
+            </p>
+
             <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
-              A premier custom software development and cloud engineering firm founded by <span className="text-slate-200 font-medium">{founderData.name}</span>. We architect production web platforms and provide transparent technical tool benchmarks.
+              {siteConfig.description}
             </p>
             
-            {/* Founder badge info in footer */}
-            <div className="p-3 rounded-xl bg-slate-800/60 border border-slate-700/60 text-xs space-y-1">
-              <div className="text-slate-300 font-semibold flex items-center gap-1.5">
-                <Code className="w-3.5 h-3.5 text-sky-400" />
-                Led by {founderData.name} ({founderData.title})
-              </div>
-              <div className="text-slate-400 text-[11px]">
-                {founderData.experienceYears}+ years in software engineering & cybersecurity audits.
-              </div>
-            </div>
-
-            <div className="pt-2 text-xs text-slate-400 space-y-1.5">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-sky-400" />
-                <span>{founderData.address}</span>
+            {/* Publisher Contact Credentials */}
+            <div className="pt-2 text-xs text-slate-400 space-y-2">
+              <div className="flex items-start gap-2">
+                <MapPin className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
+                <span>{siteConfig.address}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-sky-400" />
-                <a href={`mailto:${founderData.email}`} className="hover:text-white transition-colors">
-                  {founderData.email}
+                <Mail className="w-4 h-4 text-slate-500 shrink-0" />
+                <a href={`mailto:${siteConfig.supportEmail}`} className="hover:text-white transition-colors">
+                  {siteConfig.supportEmail}
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-sky-400" />
-                <a href={`tel:${founderData.phone.replace(/\s+/g, '')}`} className="hover:text-white transition-colors">
-                  {founderData.phone}
+                <Phone className="w-4 h-4 text-slate-500 shrink-0" />
+                <a href={`tel:${siteConfig.phone.replace(/[^0-9+]/g, '')}`} className="hover:text-white transition-colors">
+                  {siteConfig.phone}
                 </a>
               </div>
             </div>
           </div>
 
-          {/* SaaS Development Services */}
-          <div>
-            <h4 className="text-sm font-bold uppercase tracking-wider text-white mb-4">
-              SaaS Development
-            </h4>
-            <ul className="space-y-2.5 text-sm text-slate-400">
+          {/* Software Categories */}
+          <div className="space-y-4">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-white">
+              Software Categories
+            </h3>
+            <ul className="space-y-2 text-xs">
+              {publishedCategories.slice(0, 6).map((cat) => (
+                <li key={cat.id}>
+                  <Link
+                    to={`/category/${cat.id}`}
+                    className="hover:text-sky-400 transition-colors flex items-center gap-1.5"
+                  >
+                    <span>{cat.title}</span>
+                  </Link>
+                </li>
+              ))}
               <li>
-                <Link to="/services" className="hover:text-sky-400 transition-colors">
-                  Custom SaaS Architecture
-                </Link>
-              </li>
-              <li>
-                <Link to="/services" className="hover:text-sky-400 transition-colors">
-                  Full-Stack React & Next.js
-                </Link>
-              </li>
-              <li>
-                <Link to="/services" className="hover:text-sky-400 transition-colors">
-                  Stripe & Billing Integrations
-                </Link>
-              </li>
-              <li>
-                <Link to="/services" className="hover:text-sky-400 transition-colors">
-                  API & Microservices
-                </Link>
-              </li>
-              <li>
-                <Link to="/services" className="hover:text-sky-400 transition-colors">
-                  Cloud Infrastructure (AWS/GCP)
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-sky-400 font-semibold hover:underline">
-                  Request Dev Quote &rarr;
+                <Link to="/software" className="text-sky-400 hover:underline font-semibold">
+                  Browse All Categories &rarr;
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Software Reviews & Benchmarks */}
-          <div>
-            <h4 className="text-sm font-bold uppercase tracking-wider text-white mb-4">
-              Workstation & Dev Lab
-            </h4>
-            <ul className="space-y-2.5 text-sm text-slate-400">
+          {/* Editorial & Guides */}
+          <div className="space-y-4">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-white">
+              Editorial & Guides
+            </h3>
+            <ul className="space-y-2 text-xs">
               <li>
-                <Link to="/blog/wise-cleaner-review-2026" className="text-sky-400 font-medium hover:underline flex items-center gap-1">
-                  ⭐ Wise Cleaner 2026 Lab Review
+                <Link to="/reviews" className="hover:text-sky-400 transition-colors">
+                  Software Reviews
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="hover:text-sky-400 transition-colors">
-                  Multi-Tenant SaaS Architecture
+                <Link to="/comparisons" className="hover:text-sky-400 transition-colors">
+                  Product Comparisons
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="hover:text-sky-400 transition-colors">
-                  Stripe Billing & Webhook Reliability
+                <Link to="/guides" className="hover:text-sky-400 transition-colors">
+                  Practical How-To Guides
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="hover:text-sky-400 transition-colors">
-                  Cloud Compute & Docker Deployments
+                <Link to="/editorial-policy" className="hover:text-sky-400 transition-colors font-medium text-slate-200">
+                  Editorial Policy & Standards
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="hover:text-sky-400 transition-colors">
-                  Developer Workstation Optimization
+                <Link to="/about" className="hover:text-sky-400 transition-colors">
+                  About Infratechs
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="hover:text-sky-400 transition-colors">
-                  All Engineering Guides & Articles
+                <Link to="/contact" className="hover:text-sky-400 transition-colors">
+                  Contact Editorial Team
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Mandatory Legal & Policies */}
-          <div>
-            <h4 className="text-sm font-bold uppercase tracking-wider text-white mb-4">
-              Legal & Transparency
-            </h4>
-            <ul className="space-y-2.5 text-sm text-slate-400">
+          {/* Compliance & Legal */}
+          <div className="space-y-4">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-white">
+              Policies & Compliance
+            </h3>
+            <ul className="space-y-2 text-xs">
               <li>
-                <Link to="/affiliate-disclosure" className="text-slate-200 font-semibold hover:text-sky-400 transition-colors">
+                <Link to="/affiliate-disclosure" className="text-sky-400 hover:text-sky-300 font-semibold transition-colors">
                   Affiliate Disclosure
                 </Link>
               </li>
@@ -178,37 +171,34 @@ export default function Footer() {
               </li>
               <li>
                 <Link to="/refund-policy" className="hover:text-sky-400 transition-colors">
-                  Refund Policy
+                  Third-Party Refund Policy
                 </Link>
               </li>
               <li>
                 <button
                   onClick={openCookiePreferences}
-                  className="hover:text-sky-400 transition-colors flex items-center gap-1.5 text-left"
+                  className="hover:text-sky-400 transition-colors flex items-center gap-1 text-slate-400"
                 >
-                  <Cookie className="w-3.5 h-3.5" /> Cookie Settings
+                  <Cookie className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Cookie Preferences</span>
                 </button>
-              </li>
-              <li>
-                <Link to="/contact" className="hover:text-sky-400 transition-colors">
-                  Contact & Page Owner
-                </Link>
               </li>
             </ul>
           </div>
 
         </div>
 
-        {/* Bottom copyright row */}
-        <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        {/* Bottom Copyright & Disclaimer */}
+        <div className="mt-12 pt-8 border-t border-slate-800 text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p>
-            &copy; {new Date().getFullYear()} {founderData.company}. Founded by {founderData.name}. All rights reserved.
+            &copy; {new Date().getFullYear()} Infratechs ({siteConfig.domain}). All rights reserved. Independent Technology Publication.
           </p>
-          <div className="flex items-center gap-6">
-            <Link to="/privacy-policy" className="hover:text-slate-400 transition-colors">Privacy</Link>
-            <Link to="/terms-conditions" className="hover:text-slate-400 transition-colors">Terms</Link>
-            <Link to="/refund-policy" className="hover:text-slate-400 transition-colors">Refunds</Link>
-            <Link to="/affiliate-disclosure" className="hover:text-slate-400 transition-colors">Affiliate</Link>
+          <div className="flex items-center gap-4 text-[11px]">
+            <Link to="/editorial-policy" className="hover:underline">Editorial Guidelines</Link>
+            <span>&bull;</span>
+            <Link to="/affiliate-disclosure" className="hover:underline">Transparency Statement</Link>
+            <span>&bull;</span>
+            <Link to="/contact" className="hover:underline">Corrections & Feedback</Link>
           </div>
         </div>
 

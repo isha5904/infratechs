@@ -1,608 +1,495 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  ShieldCheck, 
-  Code2, 
-  Sparkles, 
+  Laptop, 
   ArrowRight, 
-  ExternalLink, 
-  CheckCircle2, 
-  Lock, 
-  Cpu, 
+  ShieldCheck, 
+  Scale, 
+  BookOpen, 
   Database, 
-  Rocket, 
-  Search, 
+  HardDrive, 
+  Smartphone, 
+  FileText, 
+  Lock, 
+  Sparkles, 
+  Cpu, 
+  Terminal,
   Calendar, 
   Clock, 
-  Star, 
-  TrendingUp, 
-  Layers, 
-  HardDrive, 
-  Award, 
-  ChevronRight,
-  Mail,
-  Check,
-  Server,
-  Zap
+  CheckCircle2, 
+  Search,
+  ExternalLink,
+  Shield,
+  Info
 } from 'lucide-react';
-import { featuredSoftware, softwareCategories } from '../data/softwareData';
-import { blogPosts, blogCategories } from '../data/blogData';
-import { founderData } from '../data/founderData';
-import SoftwareQuizModal from '../components/SoftwareQuizModal';
-import SaaSCalculator from '../components/SaaSCalculator';
+import { blogPosts } from '../data/blogData';
+import { softwareTools } from '../data/softwareData';
+import { comparisonsData } from '../data/comparisonData';
+import { publishedCategories } from '../data/categoriesData';
+import { siteConfig } from '../data/founderData';
+import ComparisonTable from '../components/ComparisonTable';
+import AffiliateNoticeBox from '../components/AffiliateNoticeBox';
 
 export default function HomePage() {
-  const [selectedSoftwareTab, setSelectedSoftwareTab] = useState('all');
-  const [blogFilterTab, setBlogFilterTab] = useState('all');
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
+  const latestGuides = blogPosts.filter((p) => p.articleType === 'guide').slice(0, 4);
+  const featuredArticles = blogPosts.slice(0, 6);
+  const dataRecoveryComparison = comparisonsData.find((c) => c.id === 'data-recovery-comparison');
+  const backupComparison = comparisonsData.find((c) => c.id === 'backup-software-comparison');
 
-  const handleNewsletterSubmit = (e) => {
-    e.preventDefault();
-    if (newsletterEmail) {
-      setNewsletterSubscribed(true);
-      setTimeout(() => {
-        setNewsletterEmail('');
-      }, 2000);
+  const getCategoryIcon = (iconName) => {
+    switch (iconName) {
+      case 'Database': return <Database className="w-5 h-5 text-emerald-500" />;
+      case 'HardDrive': return <HardDrive className="w-5 h-5 text-sky-500" />;
+      case 'Smartphone': return <Smartphone className="w-5 h-5 text-indigo-500" />;
+      case 'FileText': return <FileText className="w-5 h-5 text-rose-500" />;
+      case 'Shield': return <Lock className="w-5 h-5 text-amber-500" />;
+      case 'Sparkles': return <Sparkles className="w-5 h-5 text-purple-500" />;
+      case 'Cpu': return <Cpu className="w-5 h-5 text-cyan-500" />;
+      case 'Terminal': return <Terminal className="w-5 h-5 text-blue-500" />;
+      default: return <Laptop className="w-5 h-5 text-slate-500" />;
     }
   };
 
-  const filteredSoftware = featuredSoftware.filter(
-    (item) => selectedSoftwareTab === 'all' || item.category === selectedSoftwareTab
-  );
-
-  const filteredBlogPosts = blogPosts.filter(
-    (post) => blogFilterTab === 'all' || post.category === blogFilterTab
-  );
-
-  const featuredWisePost = blogPosts.find((p) => p.slug === 'wise-cleaner-review-2026');
-
   return (
-    <div className="space-y-20 pb-20">
+    <div className="space-y-16 sm:space-y-24 pb-20">
       
-      {/* 1. HERO SECTION: SOFTWARE DEVELOPMENT AGENCY */}
+      {/* A. HERO SECTION */}
       <section className="relative overflow-hidden pt-12 pb-16 lg:pt-20 lg:pb-24 border-b border-slate-200/80 dark:border-slate-800/80 bg-gradient-to-b from-white via-sky-50/20 to-slate-50 dark:from-slate-950 dark:via-slate-900/40 dark:to-slate-950">
-        <div className="absolute inset-0 bg-grid-slate-100 dark:bg-grid-slate-800/20 [mask-image:linear-gradient(to_bottom,white,transparent)] pointer-events-none" />
-        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-100 dark:bg-sky-950 border border-sky-300 dark:border-sky-800 text-sky-700 dark:text-sky-300 text-xs font-bold tracking-tight">
-                <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse" />
-                Custom SaaS Engineering & Software Development Agency
+                <ShieldCheck className="w-4 h-4 text-sky-600" />
+                <span>Independent Editorial Technology Publication</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.12]">
-                We Engineer Scalable SaaS Platforms &{' '}
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.15]">
+                Find the Right Software and{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-sky-500 to-indigo-600">
-                  Custom Software
+                  Technology Tools
                 </span>
               </h1>
 
               <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                Led by founder and principal architect <strong className="text-slate-900 dark:text-white">{founderData.name}</strong>, InfraTechs designs and builds production-grade web applications, multi-tenant cloud backends, and Stripe monetization systems—while sharing independent benchmarks of developer and PC tools.
+                Explore practical software reviews, side-by-side comparisons, and step-by-step guides to help you make informed technology decisions.
               </p>
 
-              {/* CTAs */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+              <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 max-w-2xl text-left">
+                <span className="font-semibold text-slate-900 dark:text-white">Our Editorial Promise:</span> {siteConfig.description} We clearly distinguish hands-on testing from research-based evaluations, and avoid inflated marketing claims.
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
                 <Link
-                  to="/services"
-                  className="px-6 py-3.5 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm transition-all shadow-lg shadow-sky-600/25 flex items-center gap-2 active:scale-95"
+                  to="/software"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white font-semibold text-sm shadow-md shadow-sky-600/20 hover:shadow-lg transition-all"
                 >
-                  <Code2 className="w-4 h-4" />
-                  Explore Development Services
+                  <Laptop className="w-4 h-4" />
+                  <span>Explore Software</span>
                 </Link>
 
                 <Link
-                  to="/contact"
-                  className="px-6 py-3.5 rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-sm transition-all flex items-center gap-2 shadow-sm"
+                  to="/guides"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 font-semibold text-sm transition-all"
                 >
-                  Get Project Consultation
+                  <BookOpen className="w-4 h-4 text-sky-500" />
+                  <span>Read Latest Guides</span>
                 </Link>
               </div>
-
-              {/* Trust Bar */}
-              <div className="pt-6 border-t border-slate-200/60 dark:border-slate-800/60 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-500 dark:text-slate-400">
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                  <span>95+ Production Projects Shipped</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Award className="w-4 h-4 text-sky-500" />
-                  <span>Founder-Led Architecture</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4 text-indigo-500" />
-                  <span>100% Code Ownership</span>
-                </div>
-              </div>
-
             </div>
 
-            {/* Right: Featured Technical Review Card (Wise Cleaner Workstation Analysis) */}
+            {/* Hero Quick Highlights Card */}
             <div className="lg:col-span-5">
-              <div className="bg-white dark:bg-slate-900 border-2 border-sky-500/30 rounded-3xl p-6 sm:p-7 shadow-2xl relative overflow-hidden group">
-                <div className="absolute top-0 right-0 bg-gradient-to-l from-amber-500 to-amber-600 text-white text-[11px] font-bold px-3 py-1 rounded-bl-xl shadow-sm flex items-center gap-1">
-                  <Sparkles className="w-3 h-3" /> FEATURED TECHNICAL GUIDE
-                </div>
-
-                <div className="flex items-center gap-3.5 mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-sky-50 dark:bg-sky-950 text-sky-600 dark:text-sky-400 flex items-center justify-center font-bold text-lg border border-sky-200 dark:border-sky-800">
-                    <HardDrive className="w-6 h-6" />
+              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl space-y-6">
+                <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+                  <div className="flex items-center gap-2 font-bold text-sm text-slate-900 dark:text-white">
+                    <Scale className="w-4 h-4 text-sky-500" />
+                    <span>Featured Comparison Matrix</span>
                   </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-slate-900 dark:text-white">
-                      Wise Cleaner Workstation Audit
-                    </h3>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">
-                      Developer PC Maintenance & Storage Test
-                    </p>
-                  </div>
-                </div>
-
-                <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 space-y-2 mb-4">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-500">Storage Cleaned:</span>
-                    <span className="font-extrabold text-emerald-600 dark:text-emerald-400">18.4 GB Build & System Junk</span>
-                  </div>
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-500">Startup Time Improvement:</span>
-                    <span className="font-extrabold text-sky-600 dark:text-sky-400">From 42s down to 22s</span>
-                  </div>
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-500">RAM Overhead:</span>
-                    <span className="font-semibold text-slate-700 dark:text-slate-300">Under 15 MB (Ultra-Lightweight)</span>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                    Our engineering team evaluated Wise Care 365 on developer workstations running Windows 11. Read our full technical breakdown of disk optimization, cache clearing, and registry safety.
-                  </p>
-
-                  <div className="pt-1">
-                    <Link
-                      to="/blog/wise-cleaner-review-2026"
-                      className="w-full py-3 px-4 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs text-center transition-all shadow-md flex items-center justify-center gap-1.5"
-                    >
-                      Read Technical Review & Buy Info <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* 2. CORE SAAS DEVELOPMENT CAPABILITIES */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 text-xs font-bold">
-            <Code2 className="w-3.5 h-3.5" /> What We Build
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Custom Software & SaaS Development Services
-          </h2>
-          <p className="text-base text-slate-600 dark:text-slate-300">
-            From early-stage MVPs to high-concurrency microservices, we build reliable, secure, and beautiful digital products.
-          </p>
-        </div>
-
-        {/* 4 Pillars */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-3 hover:shadow-lg transition-shadow">
-            <div className="w-11 h-11 rounded-xl bg-sky-50 dark:bg-sky-950 text-sky-600 dark:text-sky-400 flex items-center justify-center">
-              <Layers className="w-5 h-5" />
-            </div>
-            <h3 className="font-bold text-lg text-slate-900 dark:text-white">Full-Stack SaaS MVPs</h3>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              Rapid development with React 19, Next.js, and TypeScript. Shipped with clean component architecture and complete source code ownership.
-            </p>
-          </div>
-
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-3 hover:shadow-lg transition-shadow">
-            <div className="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
-              <Database className="w-5 h-5" />
-            </div>
-            <h3 className="font-bold text-lg text-slate-900 dark:text-white">Multi-Tenant Databases</h3>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              Rock-solid PostgreSQL with Row-Level Security (RLS) data isolation, Prisma/Drizzle models, and Redis caching layers.
-            </p>
-          </div>
-
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-3 hover:shadow-lg transition-shadow">
-            <div className="w-11 h-11 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
-              <TrendingUp className="w-5 h-5" />
-            </div>
-            <h3 className="font-bold text-lg text-slate-900 dark:text-white">Stripe Monetization</h3>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              Complete subscription billing setup: recurring tiers, seat upgrades, automated invoices, dunning webhooks, and customer portals.
-            </p>
-          </div>
-
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-3 hover:shadow-lg transition-shadow">
-            <div className="w-11 h-11 rounded-xl bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400 flex items-center justify-center">
-              <Cpu className="w-5 h-5" />
-            </div>
-            <h3 className="font-bold text-lg text-slate-900 dark:text-white">Cloud Scale & DevOps</h3>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              Dockerized containers, automated GitHub Actions CI/CD pipelines, SSL automation, and low-latency edge deployment on AWS or Vultr.
-            </p>
-          </div>
-
-        </div>
-
-        {/* Interactive SaaS Timeline & Budget Estimator */}
-        <SaaSCalculator />
-
-        {/* Development Call to Action Box */}
-        <div className="bg-slate-900 text-white rounded-3xl p-8 sm:p-10 border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2">
-            <h3 className="text-xl sm:text-2xl font-bold">Have a custom SaaS project in development?</h3>
-            <p className="text-xs sm:text-sm text-slate-400 max-w-xl">
-              Schedule a 1-on-1 architecture review directly with founder {founderData.name}. We provide fixed-price milestone estimates with no hidden fees.
-            </p>
-          </div>
-          <div className="flex items-center gap-3 shrink-0">
-            <Link
-              to="/services"
-              className="px-5 py-3 rounded-xl border border-slate-700 bg-slate-800 hover:bg-slate-700 text-white text-xs sm:text-sm font-semibold transition-colors"
-            >
-              Learn More
-            </Link>
-            <Link
-              to="/contact"
-              className="px-5 py-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs sm:text-sm font-semibold transition-all shadow-md shadow-sky-600/20"
-            >
-              Request Dev Quote
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Interactive Solution & Software Finder Quiz */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SoftwareQuizModal />
-      </section>
-
-      {/* 3. VERIFIED SOFTWARE DEALS & COMPARISON GRID */}
-      <section id="software-deals" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 scroll-mt-24">
-        
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <div>
-            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400 mb-1">
-              <ShieldCheck className="w-4 h-4" /> Workstation & Cloud Infrastructure Lab
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Tested Developer Utilities & Cloud Systems
-            </h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-              Evaluated by founder {founderData.name} and our engineering team for speed, security, and zero background telemetry bloat.
-            </p>
-          </div>
-
-          {/* Software Category Filters */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-            {softwareCategories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setSelectedSoftwareTab(cat.id)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
-                  selectedSoftwareTab === cat.id
-                    ? 'bg-sky-600 text-white shadow-sm'
-                    : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Software Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto gap-8">
-          {filteredSoftware.map((tool) => (
-            <div
-              key={tool.id}
-              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 hover:shadow-xl hover:border-sky-500/50 transition-all duration-300 flex flex-col justify-between group"
-            >
-              <div>
-                <div className="flex items-start justify-between gap-3 mb-4">
-                  <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-sky-50 dark:bg-sky-950 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
-                    {tool.badge}
+                  <span className="text-[10px] uppercase font-bold text-slate-400 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md">
+                    Verified Oct 2026
                   </span>
-                  <div className="flex items-center gap-1 text-xs font-bold text-amber-500">
-                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                    <span>{tool.rating}</span>
-                  </div>
                 </div>
 
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
-                  {tool.name}
-                </h3>
-                
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
-                  {tool.description}
-                </p>
-
-                {/* Highlights */}
-                <div className="my-4 pt-3 border-t border-slate-100 dark:border-slate-800 space-y-2 text-xs text-slate-700 dark:text-slate-300">
-                  {tool.highlights.slice(0, 3).map((item, hIdx) => (
-                    <div key={hIdx} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
-                      <span>{item}</span>
+                <div className="space-y-3.5">
+                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60 flex items-start justify-between gap-3">
+                    <div>
+                      <div className="font-bold text-xs text-slate-900 dark:text-white">Data Recovery: EaseUS vs. Disk Drill vs. Recuva</div>
+                      <div className="text-[11px] text-slate-500">Comparing deep scans, file carving, and SSD TRIM limits</div>
                     </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Pricing & Link */}
-              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
-                <div className="flex items-baseline justify-between">
-                  <div>
-                    <span className="text-2xl font-extrabold text-slate-900 dark:text-white">
-                      {tool.price}
-                    </span>
-                    <span className="text-xs text-slate-400 line-through ml-2">
-                      {tool.originalPrice}
-                    </span>
-                  </div>
-                  <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
-                    {tool.discount}
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  {tool.id === 'wise-care-365' ? (
-                    <Link
-                      to="/blog/wise-cleaner-review-2026"
-                      className="flex-1 py-3 px-4 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs text-center transition-all shadow-md flex items-center justify-center gap-1.5"
-                    >
-                      Read Wise Cleaner Review & Buy &rarr;
+                    <Link to="/comparisons" className="text-sky-600 text-xs font-bold hover:underline shrink-0">
+                      Compare &rarr;
                     </Link>
-                  ) : (
-                    <a
-                      href={tool.affiliateUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 py-3 px-4 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs text-center transition-all shadow-md flex items-center justify-center gap-1.5"
-                    >
-                      Get Software Deal / Official Site <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                  )}
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60 flex items-start justify-between gap-3">
+                    <div>
+                      <div className="font-bold text-xs text-slate-900 dark:text-white">Backup: Acronis vs. Macrium Reflect</div>
+                      <div className="text-[11px] text-slate-500">Bare-metal disaster recovery and anti-ransomware tests</div>
+                    </div>
+                    <Link to="/comparisons" className="text-sky-600 text-xs font-bold hover:underline shrink-0">
+                      Compare &rarr;
+                    </Link>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60 flex items-start justify-between gap-3">
+                    <div>
+                      <div className="font-bold text-xs text-slate-900 dark:text-white">PDF Tools: PDFgear (Free) vs. Acrobat Pro</div>
+                      <div className="text-[11px] text-slate-500">Free offline document editing vs. $240/yr subscriptions</div>
+                    </div>
+                    <Link to="/comparisons" className="text-sky-600 text-xs font-bold hover:underline shrink-0">
+                      Compare &rarr;
+                    </Link>
+                  </div>
                 </div>
 
-                <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1">
-                  <span>Tested by InfraTechs</span>
-                  <Link to="/affiliate-disclosure" className="hover:underline">
-                    Disclosure notice
+                <div className="pt-2 flex items-center justify-between text-xs text-slate-500 border-t border-slate-100 dark:border-slate-800">
+                  <span className="flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> Transparent Disclosures
+                  </span>
+                  <Link to="/editorial-policy" className="text-sky-600 dark:text-sky-400 font-semibold hover:underline">
+                    Editorial Standards &rarr;
                   </Link>
                 </div>
               </div>
-
             </div>
-          ))}
-        </div>
 
+          </div>
+        </div>
       </section>
 
-      {/* 4. TECHNICAL BLOG SECTION WITH WISE CLEANER */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+      {/* B. FEATURED CATEGORIES SECTION */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400 mb-1">
-              <Sparkles className="w-4 h-4 text-amber-500" /> Technical Blog & Engineering Articles
+            <div className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">
+              Browse by Software Domain
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Latest Engineering Guides & System Audits
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              Published Categories
             </h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-              Practical guides on software development, system maintenance, and cloud deployments.
-            </p>
           </div>
-
-          {/* Blog Category Tabs */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-            {blogCategories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setBlogFilterTab(cat.id)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
-                  blogFilterTab === cat.id
-                    ? 'bg-sky-600 text-white shadow-sm'
-                    : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Featured Wise Cleaner Review Card on Homepage */}
-        {featuredWisePost && (
-          <div className="bg-gradient-to-r from-sky-900 to-indigo-950 text-white rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden group">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              
-              <div className="lg:col-span-7 space-y-4">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="px-3 py-0.5 rounded-full bg-amber-500 text-slate-950 text-xs font-extrabold tracking-wide">
-                    FEATURED PC AUDIT
-                  </span>
-                  <span className="text-xs text-sky-200 font-medium">
-                    Wise Disk Cleaner & Wise Care 365
-                  </span>
-                </div>
-
-                <Link to={`/blog/${featuredWisePost.slug}`}>
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white group-hover:text-sky-300 transition-colors leading-tight">
-                    {featuredWisePost.title}
-                  </h3>
-                </Link>
-
-                <p className="text-sm text-sky-100 leading-relaxed">
-                  {featuredWisePost.excerpt}
-                </p>
-
-                <div className="flex items-center gap-4 text-xs text-sky-200">
-                  <span>Author: {featuredWisePost.author.name} (Founder)</span>
-                  <span>&bull;</span>
-                  <span>{featuredWisePost.readTime}</span>
-                </div>
-
-                <div className="pt-2 flex flex-wrap items-center gap-4">
-                  <Link
-                    to={`/blog/${featuredWisePost.slug}`}
-                    className="px-6 py-3 bg-sky-500 hover:bg-sky-400 text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-md flex items-center gap-2"
-                  >
-                    Read Technical Analysis & View Buy Option <ChevronRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
-
-              <div className="lg:col-span-5">
-                <Link to={`/blog/${featuredWisePost.slug}`}>
-                  <img
-                    src={featuredWisePost.coverImage}
-                    alt={featuredWisePost.title}
-                    className="w-full h-64 sm:h-72 object-cover rounded-2xl shadow-xl group-hover:scale-105 transition-transform duration-500 ring-2 ring-white/10"
-                  />
-                </Link>
-              </div>
-
-            </div>
-          </div>
-        )}
-
-        {/* Other Blog Grid on Home Page */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {filteredBlogPosts.slice(0, 3).map((post) => (
-            <div
-              key={post.slug}
-              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 flex flex-col justify-between hover:shadow-lg hover:border-sky-500/40 transition-all group"
-            >
-              <div className="space-y-3">
-                <div className="flex items-center justify-between text-xs text-slate-400">
-                  <span className="font-semibold text-sky-600 dark:text-sky-400">{post.categoryLabel}</span>
-                  <span>{post.readTime}</span>
-                </div>
-                <Link to={`/blog/${post.slug}`}>
-                  <h4 className="font-bold text-base text-slate-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors line-clamp-2">
-                    {post.title}
-                  </h4>
-                </Link>
-                <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">
-                  {post.excerpt}
-                </p>
-              </div>
-
-              <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-                <span className="text-slate-500">{post.publishedAt}</span>
-                <Link to={`/blog/${post.slug}`} className="font-bold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1">
-                  Read Article &rarr;
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="text-center pt-2">
           <Link
-            to="/blog"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-sm font-bold transition-colors shadow-sm"
+            to="/software"
+            className="text-xs sm:text-sm font-semibold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1"
           >
-            Browse All Blog Articles <ArrowRight className="w-4 h-4" />
+            <span>View All Software Tools</span>
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {publishedCategories.map((cat) => (
+            <Link
+              key={cat.id}
+              to={`/category/${cat.id}`}
+              className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500/60 dark:hover:border-sky-500/60 shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col justify-between"
+            >
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  {getCategoryIcon(cat.iconName)}
+                </div>
+                <div>
+                  <h3 className="font-bold text-base text-slate-900 dark:text-white group-hover:text-sky-600 transition-colors">
+                    {cat.title}
+                  </h3>
+                  <p className="mt-1.5 text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                    {cat.shortDescription}
+                  </p>
+                </div>
+              </div>
+              <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                <span className="font-medium text-slate-600 dark:text-slate-300">{cat.count}</span>
+                <span className="text-sky-600 dark:text-sky-400 font-semibold group-hover:translate-x-1 transition-transform inline-flex items-center gap-0.5">
+                  Explore &rarr;
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
       </section>
 
-      {/* Verified Deals & Engineering Newsletter */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-r from-sky-600 via-sky-500 to-indigo-600 rounded-3xl p-8 sm:p-12 text-white shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
-          <div className="space-y-2 text-center lg:text-left max-w-xl">
-            <span className="px-3 py-1 rounded-full bg-white/20 text-white text-xs font-bold uppercase tracking-wider inline-flex items-center gap-1.5">
-              <Mail className="w-3.5 h-3.5" /> Weekly Tech Dispatch
-            </span>
-            <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              Get Software Engineering Insights & Tested Tool Deals
-            </h3>
-            <p className="text-xs sm:text-sm text-sky-100 leading-relaxed">
-              We send one weekly email containing tested discounts (like 25% off Wise Cleaner), architecture case studies, and cloud optimizations.
+      {/* C. LATEST ARTICLES SECTION */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <div className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">
+              Fresh Technology Insights
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              Latest Published Articles
+            </h2>
+          </div>
+          <Link
+            to="/guides"
+            className="text-xs sm:text-sm font-semibold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1"
+          >
+            <span>View All Guides & Reviews</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredArticles.map((article) => (
+            <article
+              key={article.slug}
+              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+            >
+              <div>
+                <div className="relative aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800">
+                  <img
+                    src={article.coverImage}
+                    alt={article.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute top-3 left-3">
+                    <span className="px-2.5 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold">
+                      {article.categoryLabel}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-6 space-y-3">
+                  <div className="flex items-center gap-3 text-[11px] text-slate-400">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3.5 h-3.5" />
+                      {article.publishedAt}
+                    </span>
+                    <span>&bull;</span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5" />
+                      {article.readTime}
+                    </span>
+                  </div>
+
+                  <h3 className="font-bold text-base text-slate-900 dark:text-white group-hover:text-sky-600 transition-colors leading-snug">
+                    <Link to={`/blog/${article.slug}`}>
+                      {article.title}
+                    </Link>
+                  </h3>
+
+                  <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">
+                    {article.excerpt}
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-6 pt-0 border-t border-slate-100 dark:border-slate-800/80 mt-4 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <img
+                    src={article.author.avatar}
+                    alt={article.author.name}
+                    className="w-6 h-6 rounded-full object-cover"
+                  />
+                  <span className="text-xs text-slate-700 dark:text-slate-300 font-medium">
+                    {article.author.name}
+                  </span>
+                </div>
+                <Link
+                  to={`/blog/${article.slug}`}
+                  className="text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline"
+                >
+                  Read Article &rarr;
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* D. FEATURED COMPARISONS SECTION */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <div className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">
+              Objective Feature Breakdowns
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              Featured Software Comparisons
+            </h2>
+            <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-2xl">
+              Side-by-side matrices evaluating compatibility, pricing transparency, and important technical limitations.
+            </p>
+          </div>
+          <Link
+            to="/comparisons"
+            className="text-xs sm:text-sm font-semibold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1"
+          >
+            <span>All Comparison Tables</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        {/* Data Recovery Comparison Matrix */}
+        {dataRecoveryComparison && (
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <Database className="w-5 h-5 text-emerald-500" />
+                <span>{dataRecoveryComparison.title}</span>
+              </h3>
+              <span className="text-xs text-slate-500">Updated {dataRecoveryComparison.lastUpdated}</span>
+            </div>
+            <ComparisonTable 
+              tools={dataRecoveryComparison.products.map(p => {
+                const fullTool = softwareTools.find(t => t.name.includes(p.name.split(' ')[0]));
+                return {
+                  id: p.name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+                  name: p.name,
+                  badge: p.badge,
+                  primaryPurpose: p.bestSuitedFor,
+                  supportedOS: p.supportedOS,
+                  keyFeatures: [p.deepScanQuality, p.previewCapability, p.freeAllowance],
+                  pricing: p.pricingModel,
+                  pricingVerifiedDate: dataRecoveryComparison.lastUpdated,
+                  limitations: [p.keyLimitation],
+                  bestSuitedFor: p.bestSuitedFor,
+                  officialUrl: p.actionUrl,
+                  affiliateUrl: p.actionUrl,
+                  buttonLabel: p.actionLabel
+                };
+              })}
+              title={dataRecoveryComparison.title}
+              showDisclosure={true}
+            />
+          </div>
+        )}
+      </section>
+
+      {/* E. PRACTICAL GUIDES (PROBLEM-SOLVING TUTORIALS) */}
+      <section className="bg-slate-100/70 dark:bg-slate-900/40 py-16 border-y border-slate-200/80 dark:border-slate-800/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          <div>
+            <div className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">
+              Hands-on Problem Solving
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              Practical Technology Guides
+            </h2>
+            <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-2xl">
+              Step-by-step tutorials designed to help you avoid software pitfalls, protect your storage, and optimize workstation performance.
             </p>
           </div>
 
-          <div className="w-full lg:w-auto">
-            {newsletterSubscribed ? (
-              <div className="px-6 py-4 rounded-2xl bg-white/20 backdrop-blur-md text-white font-bold text-sm flex items-center justify-center gap-2 border border-white/30">
-                <Check className="w-5 h-5 text-emerald-300" /> You're subscribed! Welcome aboard.
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {latestGuides.map((guide) => (
+              <div
+                key={guide.slug}
+                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between hover:shadow-xl hover:border-sky-500/50 transition-all duration-300 group"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between text-xs text-slate-400">
+                    <span className="px-2.5 py-0.5 rounded-full bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300 font-bold">
+                      {guide.categoryLabel}
+                    </span>
+                    <span>{guide.readTime}</span>
+                  </div>
+
+                  <h3 className="font-bold text-lg text-slate-900 dark:text-white group-hover:text-sky-600 transition-colors">
+                    <Link to={`/blog/${guide.slug}`}>
+                      {guide.title}
+                    </Link>
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                    {guide.excerpt}
+                  </p>
+
+                  {guide.keyTakeaways && (
+                    <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 space-y-1.5">
+                      <div className="font-bold text-[11px] uppercase tracking-wider text-slate-500">Key Takeaway:</div>
+                      <div className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                        <span>{guide.keyTakeaways[0]}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="pt-6 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                  <span className="text-xs text-slate-400">By {guide.author.name}</span>
+                  <Link
+                    to={`/blog/${guide.slug}`}
+                    className="text-xs font-bold text-sky-600 dark:text-sky-400 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1"
+                  >
+                    <span>Read Full Guide</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
               </div>
-            ) : (
-              <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3">
-                <input
-                  type="email"
-                  required
-                  value={newsletterEmail}
-                  onChange={(e) => setNewsletterEmail(e.target.value)}
-                  placeholder="Enter your email..."
-                  className="px-4 py-3.5 rounded-2xl bg-white/10 placeholder-sky-200 text-white border border-white/30 focus:outline-none focus:ring-2 focus:ring-white w-full sm:w-80 text-sm"
-                />
-                <button
-                  type="submit"
-                  className="px-6 py-3.5 rounded-2xl bg-white text-slate-900 hover:bg-slate-100 font-bold text-sm transition-all shadow-md shrink-0 active:scale-95"
-                >
-                  Join 12,000+ Engineers
-                </button>
-              </form>
-            )}
-            <p className="text-[11px] text-sky-200 mt-2 text-center lg:text-left">
-              Unsubscribe anytime. We respect your privacy according to our <Link to="/privacy-policy" className="underline font-semibold">Privacy Policy</Link>.
-            </p>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 5. TRANSPARENCY & FOUNDER PLEDGE SECTION */}
+      {/* F. EDITORIAL TRUST & METHODOLOGY SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 sm:p-12 shadow-sm">
+        <div className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
-            <div className="lg:col-span-4 text-center lg:text-left">
-              <img
-                src={founderData.avatarUrl}
-                alt={founderData.name}
-                className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl object-cover ring-4 ring-sky-500/20 shadow-lg mx-auto lg:mx-0 mb-4"
-              />
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white">{founderData.name}</h3>
-              <p className="text-xs font-semibold text-sky-600 dark:text-sky-400">{founderData.title}</p>
-              <p className="text-xs text-slate-500 mt-1">Founder & Page Owner &bull; {founderData.company}</p>
+            <div className="lg:col-span-8 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 text-xs font-bold">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>Editorial Transparency & Standards</span>
+              </div>
+
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                Why Readers Trust Infratechs
+              </h2>
+
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                Infratechs publishes practical, research-backed software reviews and technology guides. We never accept payment to write fake positive reviews or boost software rankings. Our software evaluations are driven by real technical criteria, compatibility standards, and pricing transparency.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 text-xs space-y-1">
+                  <div className="font-bold text-slate-900 dark:text-white">Independent Research</div>
+                  <p className="text-slate-500 dark:text-slate-400">Specifications, OS compatibility, and pricing checked against official sources.</p>
+                </div>
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 text-xs space-y-1">
+                  <div className="font-bold text-slate-900 dark:text-white">Balanced Limitations</div>
+                  <p className="text-slate-500 dark:text-slate-400">We openly document software downsides, recurring billing gotchas, and hardware limits.</p>
+                </div>
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 text-xs space-y-1">
+                  <div className="font-bold text-slate-900 dark:text-white">Clear Disclosures</div>
+                  <p className="text-slate-500 dark:text-slate-400">All affiliate relationships are disclosed clearly near every outbound link.</p>
+                </div>
+              </div>
             </div>
 
-            <div className="lg:col-span-8 space-y-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
-                Founder's Technical Pledge
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
-                Engineering Integrity in Software & Recommendations
-              </h3>
-              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                "At InfraTechs, our core focus is delivering exceptional custom software and SaaS platforms to our clients. When we share our experiences with workstation tools like Wise Cleaner or cloud hosting providers, we evaluate them strictly from an engineer's perspective. We never accept payment for biased positive reviews."
-              </p>
-              <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-semibold">
-                <Link to="/affiliate-disclosure" className="text-sky-600 dark:text-sky-400 hover:underline">
-                  Read Full Affiliate Disclosure &rarr;
-                </Link>
-                <Link to="/contact" className="text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">
-                  Contact Founder Directly &rarr;
-                </Link>
+            <div className="lg:col-span-4 flex flex-col justify-center gap-3 border-t lg:border-t-0 lg:border-l border-slate-200 dark:border-slate-800 pt-6 lg:pt-0 lg:pl-8">
+              <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                Publication Policies:
               </div>
+              <Link
+                to="/about"
+                className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-sky-50 dark:hover:bg-slate-700 transition-colors text-xs font-semibold text-slate-800 dark:text-slate-200 group"
+              >
+                <span>About Infratechs</span>
+                <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-sky-600 transition-colors" />
+              </Link>
+              <Link
+                to="/editorial-policy"
+                className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-sky-50 dark:hover:bg-slate-700 transition-colors text-xs font-semibold text-slate-800 dark:text-slate-200 group"
+              >
+                <span>Editorial Policy & Standards</span>
+                <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-sky-600 transition-colors" />
+              </Link>
+              <Link
+                to="/affiliate-disclosure"
+                className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-sky-50 dark:hover:bg-slate-700 transition-colors text-xs font-semibold text-slate-800 dark:text-slate-200 group"
+              >
+                <span>Affiliate Transparency Statement</span>
+                <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-sky-600 transition-colors" />
+              </Link>
+              <Link
+                to="/contact"
+                className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-sky-50 dark:hover:bg-slate-700 transition-colors text-xs font-semibold text-slate-800 dark:text-slate-200 group"
+              >
+                <span>Contact & Editorial Corrections</span>
+                <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-sky-600 transition-colors" />
+              </Link>
             </div>
 
           </div>

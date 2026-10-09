@@ -2,37 +2,48 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { 
   ShieldCheck, 
-  Star, 
   ExternalLink, 
   CheckCircle2, 
   ArrowRight, 
   Sparkles,
   HardDrive,
+  Database,
+  Smartphone,
+  FileText,
   Lock,
-  Shield,
-  Key,
-  Cpu
+  Cpu,
+  Terminal,
+  Laptop,
+  AlertTriangle,
+  Clock,
+  BookOpen
 } from 'lucide-react';
-import { featuredSoftware, softwareCategories } from '../data/softwareData';
+import { softwareTools } from '../data/softwareData';
 import { blogPosts } from '../data/blogData';
-import { founderData } from '../data/founderData';
+import { publishedCategories } from '../data/categoriesData';
+import { comparisonsData } from '../data/comparisonData';
+import ComparisonTable from '../components/ComparisonTable';
+import AffiliateNoticeBox from '../components/AffiliateNoticeBox';
 
 export default function CategoryPage() {
   const { categoryId } = useParams();
 
-  const currentCategory = softwareCategories.find((c) => c.id === categoryId) || softwareCategories[1];
-
-  const tools = featuredSoftware.filter((s) => s.category === categoryId);
+  const currentCategory = publishedCategories.find((c) => c.id === categoryId) || publishedCategories[0];
+  const tools = softwareTools.filter((s) => s.category === categoryId);
   const relatedPosts = blogPosts.filter((p) => p.category === categoryId);
+  const relatedComparison = comparisonsData.find((c) => c.category === categoryId);
 
   const getIcon = () => {
-    switch (categoryId) {
-      case 'cleaner':
-        return <HardDrive className="w-8 h-8 text-amber-500" />;
-      case 'dev-cloud':
-        return <Cpu className="w-8 h-8 text-indigo-500" />;
-      default:
-        return <Sparkles className="w-8 h-8 text-sky-500" />;
+    switch (currentCategory.iconName) {
+      case 'Database': return <Database className="w-8 h-8 text-emerald-500" />;
+      case 'HardDrive': return <HardDrive className="w-8 h-8 text-sky-500" />;
+      case 'Smartphone': return <Smartphone className="w-8 h-8 text-indigo-500" />;
+      case 'FileText': return <FileText className="w-8 h-8 text-rose-500" />;
+      case 'Shield': return <Lock className="w-8 h-8 text-amber-500" />;
+      case 'Sparkles': return <Sparkles className="w-8 h-8 text-purple-500" />;
+      case 'Cpu': return <Cpu className="w-8 h-8 text-cyan-500" />;
+      case 'Terminal': return <Terminal className="w-8 h-8 text-blue-500" />;
+      default: return <Laptop className="w-8 h-8 text-slate-500" />;
     }
   };
 
@@ -42,152 +53,189 @@ export default function CategoryPage() {
         
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
-          <Link to="/" className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors">Home</Link>
+          <Link to="/" className="hover:text-sky-600 dark:hover:text-sky-400">Home</Link>
           <span>/</span>
-          <span className="text-slate-900 dark:text-slate-200">{currentCategory.label}</span>
+          <Link to="/software" className="hover:text-sky-600 dark:hover:text-sky-400">Software</Link>
+          <span>/</span>
+          <span className="text-slate-900 dark:text-slate-200">{currentCategory.title}</span>
         </nav>
 
-        {/* Header */}
+        {/* Category Header */}
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 sm:p-10 shadow-sm flex flex-col sm:flex-row items-start sm:items-center gap-6">
           <div className="w-16 h-16 rounded-2xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center border border-slate-200 dark:border-slate-700 shrink-0">
             {getIcon()}
           </div>
           <div className="space-y-2">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300 text-xs font-bold">
-              <ShieldCheck className="w-3.5 h-3.5" /> 2026 Laboratory Tested
+              <ShieldCheck className="w-3.5 h-3.5" /> Published Category Review
             </div>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Best {currentCategory.label} & Verified Deals
+              {currentCategory.title}
             </h1>
-            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl">
-              Compare top tested tools, disk benchmarks, detection ratios, and performance metrics evaluated by founder {founderData.name}.
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed">
+              {currentCategory.shortDescription}
             </p>
           </div>
         </div>
 
+        {/* Disclosure */}
+        <AffiliateNoticeBox />
+
         {/* Featured Software in Category */}
-        <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-            Top Rated Software in {currentCategory.label}
-          </h2>
+        {tools.length > 0 && (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+              Evaluated Software in {currentCategory.title}
+            </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {tools.map((tool) => (
-              <div
-                key={tool.id}
-                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 hover:shadow-xl hover:border-sky-500/50 transition-all duration-300 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-4 mb-4">
-                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-sky-50 dark:bg-sky-950 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
-                      {tool.badge}
-                    </span>
-                    <div className="flex items-center gap-1 text-xs font-bold text-amber-500">
-                      <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                      <span>{tool.rating} / 5.0</span>
-                    </div>
-                  </div>
-
-                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
-                    {tool.name}
-                  </h3>
-                  
-                  <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-                    {tool.description}
-                  </p>
-
-                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 space-y-2 mb-6">
-                    <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                      Laboratory Highlights
-                    </div>
-                    {tool.highlights.map((h, idx) => (
-                      <div key={idx} className="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
-                        <span>{h}</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {tools.map((tool) => (
+                <div
+                  key={tool.id}
+                  className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-7 shadow-sm hover:shadow-xl hover:border-sky-500/50 transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div className="space-y-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <h3 className="font-bold text-lg text-slate-900 dark:text-white">
+                          {tool.name}
+                        </h3>
+                        {tool.badge && (
+                          <span className="inline-block mt-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
+                            {tool.badge}
+                          </span>
+                        )}
                       </div>
-                    ))}
-                  </div>
+                    </div>
 
-                  <div className="grid grid-cols-2 gap-4 text-xs mb-6">
-                    <div className="p-3 rounded-xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-200/50 dark:border-emerald-800/40">
-                      <div className="font-bold text-emerald-700 dark:text-emerald-300 mb-1">Pros:</div>
-                      <ul className="space-y-1 text-slate-600 dark:text-slate-400">
-                        {tool.pros.map((p, idx) => (
-                          <li key={idx}>+ {p}</li>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                      {tool.tagline}
+                    </p>
+
+                    <div className="text-xs space-y-1">
+                      <div className="font-semibold text-slate-800 dark:text-slate-200">OS Compatibility:</div>
+                      <div className="text-slate-600 dark:text-slate-400 text-[11px]">
+                        {Array.isArray(tool.supportedOS) ? tool.supportedOS.join(' • ') : tool.supportedOS}
+                      </div>
+                    </div>
+
+                    <div className="space-y-1 text-xs">
+                      <div className="font-semibold text-slate-800 dark:text-slate-200">Key Capabilities:</div>
+                      <ul className="space-y-1 text-slate-600 dark:text-slate-300">
+                        {tool.keyFeatures.slice(0, 3).map((f, i) => (
+                          <li key={i} className="flex items-start gap-1.5 leading-snug">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                            <span>{f}</span>
+                          </li>
                         ))}
                       </ul>
                     </div>
-                    <div className="p-3 rounded-xl bg-rose-50/50 dark:bg-rose-950/20 border border-rose-200/50 dark:border-rose-800/40">
-                      <div className="font-bold text-rose-700 dark:text-rose-300 mb-1">Cons:</div>
-                      <ul className="space-y-1 text-slate-600 dark:text-slate-400">
-                        {tool.cons.map((c, idx) => (
-                          <li key={idx}>- {c}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
 
-                <div className="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
-                  <div className="flex items-baseline justify-between">
-                    <div>
-                      <span className="text-2xl font-extrabold text-slate-900 dark:text-white">
-                        {tool.price}
-                      </span>
-                      <span className="text-xs text-slate-400 line-through ml-2">
-                        {tool.originalPrice}
+                    <div className="space-y-1 text-xs">
+                      <div className="font-semibold text-amber-600 dark:text-amber-400 flex items-center gap-1">
+                        <AlertTriangle className="w-3.5 h-3.5" /> Limitation:
+                      </div>
+                      <p className="text-slate-500 dark:text-slate-400 text-[11px]">
+                        {tool.limitations[0]}
+                      </p>
+                    </div>
+
+                    <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
+                      <div className="font-semibold text-slate-900 dark:text-white">
+                        {tool.pricing.split('/')[0]}
+                      </div>
+                      <span className="text-[10px] text-slate-400">
+                        Checked {tool.pricingVerifiedDate}
                       </span>
                     </div>
-                    <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
-                      {tool.discount}
-                    </span>
                   </div>
 
-                  <div className="flex items-center gap-3">
+                  <div className="pt-6 mt-4">
                     <a
-                      href={tool.affiliateUrl}
+                      href={tool.affiliateUrl || tool.officialUrl}
                       target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 py-3 px-4 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs text-center transition-all shadow-md flex items-center justify-center gap-1.5"
+                      rel="noopener noreferrer sponsored"
+                      className="w-full flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-semibold text-xs shadow-sm transition-colors"
                     >
-                      Claim Discount / Official Site <ExternalLink className="w-3.5 h-3.5" />
+                      <span>{tool.buttonLabel || 'Visit Official Website'}</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   </div>
-
-                  <div className="text-[11px] text-slate-400 text-center">
-                    Tested by {founderData.name} &bull; Transparent editorial standards
-                  </div>
                 </div>
-
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* Related In-Depth Guides */}
+        {/* Side-by-Side Comparison Matrix for this Category */}
+        {relatedComparison && (
+          <div className="space-y-6 pt-6">
+            <div className="space-y-1">
+              <span className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">
+                Detailed Spec Comparison
+              </span>
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                {relatedComparison.title}
+              </h2>
+            </div>
+            <ComparisonTable
+              tools={relatedComparison.products.map((p) => ({
+                id: p.name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+                name: p.name,
+                badge: p.badge,
+                primaryPurpose: p.bestSuitedFor,
+                supportedOS: p.supportedOS,
+                keyFeatures: Object.entries(p)
+                  .filter(([k]) => !['name', 'badge', 'supportedOS', 'pricingModel', 'bestSuitedFor', 'keyLimitation', 'actionLabel', 'actionUrl', 'testedScore'].includes(k))
+                  .map(([k, v]) => `${k.replace(/([A-Z])/g, ' $1')}: ${v}`),
+                pricing: p.pricingModel,
+                pricingVerifiedDate: relatedComparison.lastUpdated,
+                limitations: [p.keyLimitation],
+                bestSuitedFor: p.bestSuitedFor,
+                officialUrl: p.actionUrl,
+                affiliateUrl: p.actionUrl,
+                buttonLabel: p.actionLabel
+              }))}
+              title={relatedComparison.title}
+              showDisclosure={false}
+            />
+          </div>
+        )}
+
+        {/* Related Guides & Tutorials in this Category */}
         {relatedPosts.length > 0 && (
-          <div className="space-y-6 pt-6 border-t border-slate-200 dark:border-slate-800">
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
-              In-Depth Benchmark Articles & Lab Tests
-            </h3>
+          <div className="space-y-6 pt-6">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+              Practical Guides & Tutorials in {currentCategory.title}
+            </h2>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {relatedPosts.map((post) => (
                 <div
                   key={post.slug}
-                  className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 flex flex-col justify-between hover:shadow-lg transition-all"
+                  className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 hover:shadow-xl hover:border-sky-500/50 transition-all flex flex-col justify-between group"
                 >
                   <div className="space-y-3">
-                    <h4 className="font-bold text-lg text-slate-900 dark:text-white">
-                      {post.title}
-                    </h4>
-                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                    <span className="text-[10px] font-bold uppercase text-sky-600 dark:text-sky-400">
+                      {post.readTime}
+                    </span>
+                    <h3 className="font-bold text-lg text-slate-900 dark:text-white group-hover:text-sky-600 transition-colors">
+                      <Link to={`/blog/${post.slug}`}>
+                        {post.title}
+                      </Link>
+                    </h3>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">
                       {post.excerpt}
                     </p>
                   </div>
-                  <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-                    <span className="text-slate-400">{post.readTime}</span>
-                    <Link to={`/blog/${post.slug}`} className="font-bold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1">
-                      Read Full Article &rarr;
+                  <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                    <span className="text-xs text-slate-400">{post.publishedAt}</span>
+                    <Link
+                      to={`/blog/${post.slug}`}
+                      className="text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1"
+                    >
+                      <span>Read Guide</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>
                 </div>

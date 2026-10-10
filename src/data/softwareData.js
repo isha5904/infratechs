@@ -409,8 +409,8 @@ export const softwareTools = [
     pricingVerifiedDate: 'October 2026',
     primaryPurpose: 'Deep junk cleaning, startup process acceleration, and safe registry maintenance for Windows rigs.',
     officialUrl: 'https://www.wisecleaner.com',
-    affiliateUrl: 'https://www.wisecleaner.com',
-    buttonLabel: 'Visit Official Website',
+    affiliateUrl: 'https://store.wisecleaner.com/order/checkout.php?PRODS=4570741&QTY=1&AFFILIATE=258532&CART=1',
+    buttonLabel: 'Buy Wise Care 365 Pro (25% Off)',
     logo: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=200',
     keyFeatures: [
       'Cleared 18.4 GB of system bloat in our workstation laboratory benchmark',

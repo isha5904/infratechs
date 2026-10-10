@@ -107,9 +107,9 @@ export default function BlogListPage() {
                     Read Full Benchmark & Verdict <ArrowRight className="w-4 h-4" />
                   </Link>
                   <a
-                    href={featuredPost.affiliateSnippet?.affiliateUrl}
+                    href={featuredPost.affiliateSnippet?.affiliateUrl || "https://store.wisecleaner.com/order/checkout.php?PRODS=4570741&QTY=1&AFFILIATE=258532&CART=1"}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="noopener noreferrer sponsored"
                     className="px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-1.5"
                   >
                     Get 25% Off Wise Cleaner (Affiliate Link) <ExternalLink className="w-3.5 h-3.5 text-sky-500" />
